@@ -1,0 +1,527 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{paratype}
+
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\DeclareMathOperator{\mcd}{mcd}
+
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{problema}{Problema}
+\newtheorem*{comentario}{Comentario}
+
+\title{Algunos ejercicios de la teoría de números elemental}
+\author{Alexey Beshenov (cadadr@gmail.com)}
+\date{21 de septiembre de 2021}
+
+\newenvironment{solucion}{\begin{proof}[Solución]\small}{\end{proof}}
+
+\begin{document}
+
+\maketitle
+
+Los ejercicios de esta hoja usan los siguientes conceptos de la teoría de
+números elemental: divisibilidad, mcd, identidad de Bézout, factorización en
+números primos, congruencias mód $n$, función $\phi$ de Euler.
+
+\ifdefined\solutions
+\else
+\vspace{1em}
+
+Para las soluciones, véase
+
+\url{https://cadadr.org/teoria-de-numeros-basica/guia-1-soluciones.pdf}
+\fi
+
+\section*{Ejercicios para hacer en vivo}
+
+\setcounter{problema}{-1}
+\begin{problema}
+  ~
+  \begin{enumerate}
+  \item[a)] Encuentre el mínimo número positivo $n$ de la forma $30\,a + 105\,b$
+    para $a,b \in \ZZ$.
+
+    ¿Cuáles son los $a$ y $b$ correspondientes? ¿Son únicos?
+
+  \item[b)] Calcule $5^{2021} \pmod{13}$.
+
+  \item[c)] Para $N = 105$, ¿cuántos números $0 \le x < N$ son invertibles
+    módulo $N$?
+
+  \item[d)] Para $n = 2,3,4,5,6$, ¿cuántos números $0 \le x < 13$ satisfacen
+    $x \equiv y^n \pmod{13}$ para algún $y \in \ZZ$?
+  \end{enumerate}
+
+  \ifdefined\solutions\begin{solucion}
+    En a), tenemos $\mcd (30,105) = 15$, así que $30\,a + 105\,b$ es divisible
+    por $15$. Esto demuestra que $30\,a + 105\,b \ge 15$, cuando $30\,a + 105\,b$
+    es positivo. El algoritmo de Euclides nos da la identidad de Bézout con
+    $(a,b) = (-3,1)$:
+    $$30\cdot (-3) + 105\cdot 1 = 15.$$
+    Los coeficientes $a,b$ no son para nada únicos: por ejemplo, en lugar de
+    $(-3,1)$ funcionaría $(4,-1)$. Véase el problema $12$.
+
+    \vspace{1em}
+
+    En b), notamos que $5^2 = 25 \equiv 12 \equiv -1 \pmod{13}$. Luego,
+    \[
+      5^3 \equiv -5, ~
+      5^4 \equiv 1, ~
+      \ldots, ~
+      5^{2021} = 5\cdot (5^4)^{505} \equiv 5.
+    \]
+
+    En c), el número de los restos invertibles mód $n$ es la función de Euler
+    $\phi(n)$. Luego
+    $\phi (105) = \phi(3)\,\phi(5)\,\phi(7) = 2\cdot 4\cdot 6 = 48$.
+
+    \vspace{1em}
+
+    En d), podemos usar el siguiente resultado poderoso: para todo primo $p$
+    existe un número $x \in \ZZ$ (llamado una \textbf{raíz primitiva mód $p$})
+    tal que las potencias
+    $$1, x, x^2, \ldots, x^{p-2}$$
+    representan los diferentes restos no nulos módulo $p$.
+
+    En general no hay una manera sencilla de encontrar el $x$ en cuestión, pero
+    para $p = 13$ funciona $x = 2$:
+    \[
+      2^0 \equiv 1, ~
+      2^1 \equiv 2, ~
+      2^2 \equiv 4, ~
+      2^3 \equiv 8, ~
+      2^4 \equiv 3, ~
+      2^5 \equiv 6, ~
+      2^6 \equiv 12, ~
+      2^7 \equiv 11, ~
+      2^8 \equiv 9, ~
+      2^9 \equiv 5, ~
+      2^{10} \equiv 10, ~
+      2^{11} \equiv 7.
+    \]
+
+    Luego los cuadrados no nulos mód $13$ son las potencias pares de $2$:
+    \[ 1 \equiv 2^0, ~
+      3 \equiv 2^4, ~
+      4 = 2^2, ~
+      9 \equiv 2^8, ~
+      10 \equiv 2^{10}, ~
+      12 \equiv 2^6. \]
+    De la misma manera, las cuartas potencias no nulas son
+    \[ 1 \equiv 2^0, ~
+      3 \equiv 2^4, ~
+      9 \equiv 2^8. \]
+    Los cubos serán las potencias de $2$ divisibles por $3$:
+    \[ 1 \equiv 2^0, ~
+      5 \equiv 2^9, ~
+      8 = 2^3, ~
+      12 \equiv 2^6. \]    
+    Aquí las sextas potencias son $1$ y $12 \equiv -1$.
+
+    Lo más interesante sucede con las quintas potencias. Tenemos $2^5 = 6$, y de
+    hecho $6$ es otra raíz primitiva: las potencias de $6$ recorren todos los
+    restos no nulos mód $13$. Esto significa que cualquier resto es una quinta potencia:
+    \[
+      2 \equiv 6^5, ~
+      3 \equiv 9^5, ~
+      4 \equiv 10^5, ~
+      5 \equiv 5^5, ~
+      6 \equiv 2^5, ~
+      7 \equiv 11^5, ~
+      8 \equiv 8^5, ~
+      9 \equiv 3^5, ~
+      10 \equiv 4^5, ~
+      11 \equiv 7^5, ~
+      12 \equiv 12^5.
+    \]
+    Esto se debe al hecho de que $\mcd (5,12) = 1$. (¿Por qué?)
+  \end{solucion}\fi
+\end{problema}
+
+\begin{problema}
+  Si $\mcd (a,b) = \mcd (c,d) = 1$ y $\frac{a}{b} + \frac{c}{d}$ es un número
+  entero, demuestre que necesariamente $b = \pm d$.
+
+  \ifdefined\solutions\begin{solucion}
+    Tenemos
+    $$\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd},$$
+    donde
+    $$ad + bc = bde.$$
+    Ahora $ad = b\,(de - c)$ y $\mcd (a,b) = 1$, así que $b \mid d$. De manera
+    similar se ve que $d \mid b$.
+  \end{solucion}\fi
+\end{problema}
+
+\begin{problema}
+  El teorema de Wilson afirma que $(p - 1)! \equiv -1 \pmod{p}$ para $p$
+  primo. Demuestre que $(n-1)! \equiv 0 \pmod{n}$ si $n \ge 6$ es compuesto.
+
+  \ifdefined\solutions\begin{solucion}    
+    Supongamos que $n = ab$, donde $1 < a,b < n$. Entre los números
+    $2,3,4,\ldots,n-1$ necesariamente aparecen $a$ y $b$. Si $a \ne b$, esto nos
+    permite concluir que $n \mid (n-1)!$. En el caso especial de $a = b$,
+    tenemos $n = a^2$. Notamos que $2a < a^2$ para $a > 2$, así que entre los
+    números $2,3,4,\ldots,a^2-1$ aparecen $a$ y $2a$. Luego, $a^2 \mid (a^2-1)!$
+    para $a > 2$.
+  \end{solucion}\fi
+\end{problema}
+
+\begin{problema}
+  ~
+
+  \begin{enumerate}
+  \item[a)] Demuestre que $\mcd(a, a + b) \mid b$.
+
+  \item[b)] Si $\mcd (a,b) = 1$, demuestre que $\mcd (a+b, a-b) = 1$ o $2$.
+
+    En particular, calcule $\mcd (a+1, a-1)$.
+  \end{enumerate}
+
+  \ifdefined\solutions\begin{solucion}
+    En parte a), si $d = \gcd (a,a+b)$, entonces $d \mid a$ y $d \mid a+b$, y
+    luego $d \mid b$.
+
+    \vspace{1em}
+
+    En la parte b), tenemos $d \mid (a+b)$ y $d \mid (a-b)$, así que $d \mid 2a$
+    y $d \mid 2b$. Puesto que $a$ y $b$ son coprimos, podemos concluir que
+    $d = 1$ o $2$.
+
+    En particular, no es difícil calcular que
+    \[ \mcd (a-1,a+1) =
+      \begin{cases}
+        1, & \text{si }a\text{ es par}, \\
+        2, & \text{si }a\text{ es impar}.
+      \end{cases} \]
+    \end{solucion}\fi
+\end{problema}
+
+\begin{problema}[IWYMIC 2019 Individual contest]
+  Encuentre el mínimo $n$ tal que $x = 55 n^3$ que tiene $55$ divisores
+  $1 \le d \le x$, $d \mid x$.
+
+  \ifdefined\solutions\begin{solucion}
+    Vamos a denotar por $d (x)$ la función del número de divisores. Tenemos
+    $d (p^e) = e+1$. Esta función es multiplicativa, así que
+    $$d (p_1^{e_1}\cdots p_s^{e_s}) = (e_1+1)\cdots (e_s+1).$$
+    En nuestro caso, buscamos $n$ tal que $d (55\,n^3) = 55$. Puesto que
+    $55 = 5\cdot 11$, no tenemos muchas opciones:
+    $x = p^4\,q^{10}$ o $p^{10}\,q^4$, donde $p = 5$, $q = 11$.
+    El número más pequeño es visiblemente $5^{10}\cdot 11^4$. Sustituyendo
+    $n = 5^a\cdot 11^b$, calculamos de
+    $$5^{10}\cdot 11^4 = 55\,n^3 = 5^{3a+1}\cdot 11^{3b+1}$$
+    que $n = 5^3\cdot 11 = 1375$.
+  \end{solucion}\fi
+\end{problema}
+
+\begin{problema}[IWYMIC 2019 Team contest]
+  $p_1, p_2, p_3$ son primos tales que
+  $$p_1 p_2 p_3 = p_1 + p_2 + p_3 + 1007.$$
+  Encuentre $p_1$, $p_2$, $p_3$.
+
+  \ifdefined\solutions\begin{solucion}
+    Reduciendo mód 2, primero notamos que necesariamente dos de estos primos son
+    pares: $p_1 = p_2 = 2$. Pongamos $p_3 = p$. Nos queda nada más
+    $4p = p + 1011$, de donde $p = 337$. Este número es primo.
+  \end{solucion}\fi
+\end{problema}
+
+\begin{problema}
+  Se fija un punto en el plano y se consideran unas copias de $n$-ágono
+  regular, tratando de colocarlas alrededor del punto.
+  Demuestre que esto es posible solamente con $6$ triángulos, o $3$ cuadrados, o
+  $6$ hexágonos, como en el dibujo de abajo:
+
+  \begin{center}
+    \begin{tikzpicture}
+      \node at (0,0) [circle,fill,inner sep=1pt]{};
+
+      \draw (0:0)--(0:1)--(60:1);
+      \draw (0:0)--(60:1)--(120:1);
+      \draw (0:0)--(120:1)--(180:1);
+      \draw (0:0)--(180:1)--(240:1);
+      \draw (0:0)--(240:1)--(300:1);
+      \draw (0:0)--(300:1)--(360:1);
+
+      \node at (3,0) [circle,fill,inner sep=1pt]{};
+
+      \draw[xshift=3cm] (0,0)--(1,0)--(1,1)--(0,1);
+      \draw[xshift=3cm] (0,0)--(0,1)--(-1,1)--(-1,0);
+      \draw[xshift=3cm] (0,0)--(-1,0)--(-1,-1)--(0,-1);
+      \draw[xshift=3cm] (0,0)--(0,-1)--(1,-1)--(1,0);
+
+      \node at (7,0) [circle,fill,inner sep=1pt]{};
+
+      \draw[xshift=8cm] (120:1) -- (60:1) -- (0:1) -- (300:1) -- (240:1);
+
+      \draw[xshift=6.5cm,yshift=0.86602cm] (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1);
+      \draw[xshift=6.5cm,yshift=-0.86602cm] (120:1) -- (180:1) -- (240:1) -- (300:1) -- (360:1);
+      \draw[xshift=7cm] (0,0) -- (60:1);
+      \draw[xshift=7cm] (0,0) -- (180:1);
+      \draw[xshift=7cm] (0,0) -- (300:1);
+    \end{tikzpicture}
+  \end{center}
+
+  Sugerencia: si $N$ es el número de $n$-ágonos, entonces
+  $N\cdot (n-2)\,\frac{\pi}{n} = 2\pi$. (¿Por qué?)
+
+%   \ifdefined\solutions\begin{solucion}
+%     An internal angle of a regular $n$-gon is $(n-2)\,\frac{\pi}{n}$. On the other hand, the sum the internal angles of $N$ adjacent polygons around the vertex should be $2\pi$. We have therefore $N\cdot (n-2)\,\frac{\pi}{n} = 2\pi$. This leaves the equation $N = \frac{2n}{n-2}$ for $N,n\in \ZZ$. In particular, $(n,N) = (3,6), (4,4), (6,3)$ are solutions, and we would like to see that there are no other solutions. The function $f (n) = \frac{2n}{n-2}$ for $n \ge 3$ is strictly decreasing, and $f (n) \xrightarrow{n\to \infty} 2$. We calculate
+% $$f (3) = 6, \quad f (4) = 4, \quad f (5) = \frac{10}{3}, \quad f (6) = 3, \quad f (7) = \frac{14}{5} < 3,$$
+% so that $2 < f (n) < 3$ for $n \ge 7$. This allows us to conclude that the only
+% integral values are $f (3) = 6$, $f (4) = 4$, $f (6) = 3$.
+% \end{solucion}\fi
+ \end{problema}
+
+ \begin{problema}
+   Demuestre que si $a^n - 1$ es primo, entonces $a = 2$ y $n$ es primo.
+
+%   \ifdefined\solutions\begin{solucion}
+%     Assume that there exists an odd prime $p \mid n$. Then we may write $m = n/p$ and
+% $$a^n - 1 = (a^m)^p + 1^p = (a^m + 1)\,(a^{m\,(p-1)} + a^{m\,(p-2)} + \cdots + 1),$$
+% and we should have $a = 2$ and $n = p$, because otherwise $a^m - 1 > 1$ and the number is not prime.
+%   \end{solucion}\fi
+\end{problema}
+
+\begin{comentario}
+  Los primos de la forma $2^p - 1$ se conocen como los
+  \textbf{primos de Mersenne}; su infinitud es una conjetura abierta. Muchos de
+  los números $2^p - 1$ son compuestos, el primero siendo
+  $2^{11} - 1 = 23\cdot 89$.
+
+  \begin{center}
+    \begin{tabular}{ll}
+      $2^2 - 1\colon$ & primo $= 3$ \\
+      $2^3 - 1\colon$ & primo $= 7$ \\
+      $2^5 - 1\colon$ & primo $= 31$ \\
+      $2^7 - 1\colon$ & primo $= 127$ \\
+      $2^{11} - 1\colon$ & compuesto $= 23\cdot 89$ \\
+      $2^{13} - 1\colon$ & primo $= 8191$ \\
+      $2^{17} - 1\colon$ & primo $= 131071$ \\
+      $2^{19} - 1\colon$ & primo $= 524287$ \\
+      $2^{23} - 1\colon$ & compuesto $= 47\cdot 178481$ \\
+      $2^{29} - 1\colon$ & compuesto $= 233\cdot 1103\cdot 2089$ \\
+      $2^{31} - 1\colon$ & primo $= 2147483647$ \\
+      $2^{37} - 1\colon$ & compuesto $= 223\cdot 616318177$ \\
+      $2^{41} - 1\colon$ & compuesto $= 13367\cdot 164511353$ \\
+                      & $\cdots$ \\
+      $2^{61} - 1\colon$ & primo $= 2305843009213693951$ \\
+      $2^{67} - 1\colon$ & compuesto $= 193707721\cdot 761838257287$ \\
+                      & $\cdots$
+    \end{tabular}
+  \end{center}
+\end{comentario}
+
+\begin{problema}
+  Demuestre que si $a^n + 1$ es primo, entonces $a$ es par y $n = 2^k$ es
+  una potencia de $2$.
+
+%   \ifdefined\solutions\begin{solucion}
+%     If $a$ is odd, then $a^n + 1$ is even, so it's clearly not a prime. This shows that $a$ must be even. Now consider an odd prime $p \mid n$ and let $m = n/p$. Then
+% $$a^n + 1 = (a^m)^p + 1^p = (a^m + 1)\,(a^{m\,(p-1)} - a^{m\,(p-2)} + a^{m\,(p-3)} - \cdots - a^m + 1).$$
+% We note that the alternating sum in the second multiple is greater than $1$, and the above factorization means that $a^n + 1$ is not prime. This shows that no odd prime $p$ can divide $n$, and therefore $n = 2^t$ for some $t$.
+%   \end{solucion}\fi
+\end{problema}
+
+\begin{comentario}
+  Los primos de la forma $2^{2^k} + 1$ se conocen como los
+  \textbf{primos de Fermat}. Su finitud es una conjetura abierta.
+  El primer número compuesto de esta forma es $2^{2^5}+1 = 641\cdot 6700417$
+  (dos factores primos). Note que estos números crecen muy rápido con $k$.
+
+    \begin{center}
+      \begin{tabular}{ll}
+        $2^{2^0} + 1\colon$ & primo $= 3$ \\
+        $2^{2^1} + 1\colon$ & primo $= 5$ \\
+        $2^{2^2} + 1\colon$ & primo $= 17$ \\
+        $2^{2^3} + 1\colon$ & primo $= 257$ \\
+        $2^{2^4} + 1\colon$ & primo $= 65537$ \\
+        $2^{2^5} + 1\colon$ & compuesto $= 641\cdot 6700417$ \\
+        $2^{2^6} + 1\colon$ & compuesto $= 274177\cdot 67280421310721$ \\
+        $2^{2^7} + 1\colon$ & compuesto $= 59649589127497217\cdot 5704689200685129054721$
+      \end{tabular}
+    \end{center}
+
+    Fermat conjeturó (demasiado optimísticamente) que los números de la forma
+    $2^{2^k} + 1$ son primos, pero Euler descubrió que
+    $641 \mid (2^{2^5} + 1)$. De hecho, parece que para todo $k \ge 5$ los
+    números $2^{2^k} + 1$ son compuestos.
+\end{comentario}
+
+\ifdefined\solutions
+\else
+\pagebreak
+\fi
+
+\begin{problema}
+  ~
+
+  \begin{enumerate}
+  \item[a)] Para $a \ne 0$ y $m \ne n$ calcule $\mcd (a^{2^m} + 1, a^{2^n} + 1)$.
+
+  \item[b)] Concluya que los números $2^2 + 1$, $2^{2^2} + 1$, $2^{2^3} + 1$,
+    $\ldots$ son coprimos por pares.
+  \end{enumerate}
+
+  % \ifdefined\solutions\begin{solucion}
+  %   For $n > m$ we show that $\gcd (a^{2^n} + 1, a^{2^m} + 1) = 1$ or $2$ depending on whether $a$ is odd or even.
+
+  %   Note that
+  %   $$x^{2^n} - 1 = (x-1)\,(x+1)\,(x^2 + 1)\,(x^4 + 1)\,(x^8 + 1)\cdots (x^{2^{n-1}} + 1).$$
+  %   This is easily proved by induction on $n$. It follows that if $n > m$, then $(a^{2^m} + 1) \mid (a^{2^n} - 1)$. In particular, if $p$ is an odd prime such that $p \mid (a^{2^n} + 1)$ and $p \mid (a^{2^m} + 1)$, then $p \mid (a^{2^n} - 1)$. However, this contradicts the fact that
+  %   $$\gcd (a^{2^n} + 1, a^{2^n} - 1) = \begin{cases}
+  %     1, & a \text{ is even},\\
+  %     2, & a \text{ is odd}.
+  %   \end{cases}$$
+  %   The very same reasoning shows that if $2^k \mid (a^{2^n} + 1)$ and $2^k \mid (a^{2^m} + 1)$, then $k = 1$. This allows us to conclude that
+  %   \[ \gcd (a^{2^n} + 1, a^{2^m} + 1) = \begin{cases}
+  %       1, & a \text{ is even},\\
+  %       2, & a \text{ is odd}.
+  %     \end{cases} \]
+  % \end{solucion}\fi
+\end{problema}
+
+\begin{problema}[Congruencia de Euler]
+  Para $n > 1$ sean
+  $$a_1, a_2, \ldots, a_{\phi (n)}$$
+  números que recorren diferentes restos módulo $n$ con $\mcd (a_i,n) = 1$.
+
+  \begin{enumerate}
+  \item[a)] Demuestre que si $\mcd (a,n) = 1$, entonces los números
+    $$aa_1, aa_2, \ldots, aa_{\phi (n)}$$
+    también recorren diferentes restos módulo $n$ con $\mcd (a_i,n) = 1$.
+
+  \item[b)] Use el punto anterior para probar la congruencia de Euler:
+    $$a^{\phi (n)} \equiv 1 \pmod{n} \quad \text{para }\mcd (a,n) = 1.$$
+  \end{enumerate}
+
+  % \ifdefined\solutions\begin{solucion}
+  %   Assume that $a a_i \equiv a a_j \pmod{n}$, where $\gcd (a,n) = 1$. Then
+  %   thanks to Bézout's identity $ab + nc = 1$, we conclude that there exists $b$
+  %   such that $ab \equiv 1 \pmod{n}$. Multiplying the congruence
+  %   $a a_i \equiv a a_j \pmod{n}$ by $b$, we conclude that
+  %   $a_i \equiv a_j \pmod{n}$. This shows that
+  %   $aa_1, aa_2, \ldots aa_{\phi (n)}$ are pairwise incongruent. Moreover, if
+  %   $\gcd (a_i,n) = \gcd (a,n) = 1$, then $\gcd (a a_i, n) = 1$.
+
+  %   \vspace{1em}
+
+  %   Let $a_1,a_2,\ldots,a_{\phi (n)}$ be a reduced residue system modulo
+  %   $n$. Then for $a$ such that $\gcd (a,n) = 1$, we checked that
+  %   $aa_1, aa_2, \ldots aa_{\phi (n)}$ is another reduced residue system. But
+  %   multiplication by $a$ just permutes the corresponding residues modulo $n$,
+  %   so that
+  %   $$a_1\cdots a_{\phi (n)} \equiv a^{\phi (n)}\,a_1\cdots a_{\phi (n)} \pmod{n}.$$
+  %   Each $a_i$ is invertible modulo $n$, so we may cancel these terms to
+  %   conclude that $a^{\phi (n)} \equiv 1 \pmod{n}$.
+  % \end{solucion}\fi
+\end{problema}
+
+\pagebreak
+
+\section*{Ejercicios para hacer en casa}
+
+\begin{problema}
+  ~
+
+  \begin{enumerate}
+  \item[a)] Demuestre que si $n$ es impar, entonces $8 \mid (n^2 - 1)$. Además,
+    si $3\nmid n$, entonces $6 \mid (n^2 - 1)$.
+
+  \item[b)] Demuestre que para todo $n$, se tiene $30 \mid (n^5 - n)$ y
+    $42 \mid (n^7 - n)$.
+  \end{enumerate}
+\end{problema}
+
+\begin{problema}
+  Sean $a,b,c$ números enteros.
+
+  \begin{enumerate}
+  \item[a)] Demuestre que la ecuación
+    $$ax + by = c$$
+    tiene una solución entera $(x,y)$ si y solamente si $\mcd (a,b) \mid c$.
+
+  \item[b)] (*) Si $(x_0,y_0)$ es una solución, demuestre que todas las
+    soluciones tienen forma
+    $$x = x_0 + t\,\frac{b}{d}, \quad y = y_0 - t\,\frac{a}{d},$$
+    para $d = \mcd (a,b)$ y $t \in \ZZ$.
+  \end{enumerate}
+\end{problema}
+
+\begin{problema}[Teorema chino del resto]
+  Sean $m$ y $n$ dos enteros coprimos ($\mcd (m,n) = 1$).
+
+  \begin{itemize}
+  \item[a)] Demuestre que existen enteros $x$, $y$ tales que
+    \begin{gather*}
+      x \equiv 1 \pmod{m}, \quad x \equiv 0 \pmod{n}, \\
+      y \equiv 0 \pmod{m}, \quad y \equiv 1 \pmod{n}.
+    \end{gather*}
+
+  \item[b)] Dados $a, b \in \ZZ$, encuentre $z$ tal que
+    $$z \equiv a \pmod{m}, \quad z \equiv b \pmod{n}.$$
+  \end{itemize}
+\end{problema}
+
+\begin{problema}
+  Para un entero $n$ y un parámetro natural $k = 0,1,2,\ldots$, definamos
+  $$\sigma_k (n) = \sum_{\substack{1 \le d \le n \\ d \mid n}} d^k.$$
+
+  \begin{enumerate}
+  \item[a)] Demuestre que $\sigma_k (mn) = \sigma_k (m) \, \sigma_k (n)$ para
+    $\mcd (m,n) = 1$.
+
+  \item[b)] Para $n = p_1^{e_1} \cdots p_s^{e_s}$, deduzca una fórmula para
+    $\sigma_k (n)$.
+  \end{enumerate}
+\end{problema}
+
+\begin{problema}
+  Como un caso particular del ejercicio anterior, consideremos el número de
+  divisores
+  $$d (n) = \sigma_0 (n) = \# \{ 1 \le d \le n \mid d \mid n \}.$$
+
+  Encuentre los números tales que $d (n) = n/3$ y $n = d(n)^2$.
+\end{problema}
+
+\begin{problema}
+  Calcule la suma
+  $$\sum_{\substack{1 \le t \le n \\ \mcd (t,n) = 1}} t = \frac{1}{2}\,n\,\phi(n).$$
+\end{problema}
+
+\begin{problema}
+  Demuestre que las ecuaciones
+  $$3x^2 + 2 = y^2, \quad 7x^3 + 2 = y^3$$
+  no tienen soluciones $x,y \in \ZZ$, usando reducción módulo algunos $p$.
+\end{problema}
+
+\begin{problema}
+  Demuestre que para todo primo $p$, el numerador del número
+  $$1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{p-1}$$
+  es divisible por $p$.
+\end{problema}
+
+\begin{problema}[IWYMIC 2019 Individual contest]
+  Encuentre todas las soluciones enteras $(m,n)$ de la ecuación
+  $$\frac{m^2 + mn + n^2}{m + 2n} = \frac{13}{3}.$$
+\end{problema}
+
+\begin{problema}[IWYMIC 2019 Team contest]
+  Encontrar todos los posibles dígitos $(a,b)$ (es decir, $0 \le a, b \le 9$)
+  tales que el número $2a1b9$ cumple la congruencia
+  $$2a1b9^{2019} \equiv 1 \pmod{13}.$$
+\end{problema}
+
+\end{document}
