@@ -1,4 +1,4 @@
-all: guia-1.pdf guia-1-soluciones.pdf hoja-0.pdf hoja-1.pdf hoja-2.pdf hoja-3.pdf hoja-4.pdf hoja-5.pdf hoja-6.pdf
+all: guia-1.pdf guia-1-soluciones.pdf hoja-0.pdf hoja-1.pdf hoja-2.pdf hoja-3.pdf hoja-4.pdf hoja-5.pdf hoja-6.pdf residuos.pdf
 
 guia-1.pdf: guia-1.tex
 	pdflatex guia-1
@@ -36,6 +36,9 @@ hoja-6.pdf: hoja-6.tex
 	pdflatex hoja-6
 	pdflatex hoja-6
 
-clean:
-	rm -f *.aux *.log *.out *.pdf
+residuos.pdf: residuos.tex
+	xelatex residuos
+	xelatex residuos
 
+clean:
+	rm -f *.aux *.log *.nav *.out *.pdf *.snm *.toc *~
