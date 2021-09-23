@@ -1,0 +1,161 @@
+\documentclass{article}
+
+\input{definitions}
+
+\title{Hoja 3: Función $\phi$ de Euler}
+\author{Alexey Beshenov (cadadr@gmail.com)}
+\date{23 de septiembre de 2021}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{section}{3}
+
+\begin{definicion}
+  Para un número natural $n$, la \textbf{función $\phi$ de Euler} es el número
+  de los residuos invertibles mód $n$:
+  $$\phi (n) = \# (\ZZ/n\ZZ)^\times.$$
+  O de manera equivalente (véase el problema~0.3),
+  es el número de $1 \le a < n$ coprimos con $n$:
+  $$\phi (n) = \# \{ 1 \le a < n \mid \mcd (a,n) = 1 \}.$$
+\end{definicion}
+
+\begin{ejemplo}
+  He aquí algunos valores de $\phi (n)$:
+
+  \begin{center}
+    \begin{tabular}{rcccccccccccccccccccc}
+      \hline
+      $n\colon$ & $1$& $2$& $3$& $4$& $5$& $6$& $7$& $8$& $9$& $10$& $11$& $12$& $13$& $14$& $15$& $16$& $17$& $18$& $19$& $20$ \\
+      $\phi(n)\colon$ & $1$& $1$& $2$& $2$& $4$& $2$& $6$& $4$& $6$& $4$& $10$& $4$& $12$& $6$& $8$& $8$& $16$& $6$& $18$& $8$ \\
+      \hline
+      $n\colon$ & $21$& $22$& $23$& $24$& $25$& $26$& $27$& $28$& $29$& $30$& $31$& $32$& $33$& $34$& $35$& $36$& $37$& $38$& $39$& $40$ \\
+      $\phi(n)\colon$ & $12$& $10$& $22$& $8$& $20$& $12$& $18$& $12$& $28$& $8$& $30$& $16$& $20$& $16$& $24$& $12$& $36$& $18$& $24$& $16$ \\
+      \hline
+      $n\colon$ & $41$& $42$& $43$& $44$& $45$& $46$& $47$& $48$& $49$& $50$& $51$& $52$& $53$& $54$& $55$& $56$& $57$& $58$& $59$& $60$ \\
+      $\phi(n)\colon$ & $40$& $12$& $42$& $20$& $24$& $22$& $46$& $16$& $42$& $20$& $32$& $24$& $52$& $18$& $40$& $24$& $36$& $28$& $58$& $16$ \\
+      \hline
+      $n\colon$ & $61$& $62$& $63$& $64$& $65$& $66$& $67$& $68$& $69$& $70$& $71$& $72$& $73$& $74$& $75$& $76$& $77$& $78$& $79$& $80$ \\
+      $\phi(n)\colon$ & $60$& $30$& $36$& $32$& $48$& $20$& $66$& $32$& $44$& $24$& $70$& $24$& $72$& $36$& $40$& $36$& $60$& $24$& $78$& $32$ \\
+      \hline
+      $n\colon$ & $81$& $82$& $83$& $84$& $85$& $86$& $87$& $88$& $89$& $90$& $91$& $92$& $93$& $94$& $95$& $96$& $97$& $98$& $99$& $100$ \\
+      $\phi(n)\colon$ & $54$& $40$& $82$& $24$& $64$& $42$& $56$& $40$& $88$& $24$& $72$& $44$& $60$& $46$& $72$& $32$& $96$& $42$& $60$& $40$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{ejemplo}
+
+\begin{problema}
+  \label{probl:phi-para-primario}
+  Calcule que para un primo $p$ y $e = 1,2,3,\ldots$ se tiene
+  $$\phi (p^e) = p^e - p^{e-1} = p^e\,\left(1 - \frac{1}{p}\right).$$
+\end{problema}
+
+\begin{problema}[Multiplicatividad]
+  \label{probl:phi-multiplicativo}
+  Demuestre que si $\mcd (m,n) = 1$, entonces
+  $$\phi (mn) = \phi(m)\,\phi(n).$$
+
+  Sugerencia: véase el problema~2.2.
+\end{problema}
+
+\begin{problema}
+  Deduzca de \ref{probl:phi-para-primario} y \ref{probl:phi-multiplicativo} la
+  fórmula
+  $$\phi (n) = n\,\prod_{p \mid n} \left(1 - \frac{1}{p}\right),$$
+  donde el producto es sobre todos los divisores primos de $n$.
+\end{problema}
+
+\begin{problema}
+  ~
+
+  \begin{itemize}
+  \item[a)] Demuestre que $\phi(n)$ es par para $n \ge 3$.
+
+  \item[b)] ¿Para cuáles $n$ se tiene $\phi (n) \le 10$?
+
+  \item[c)] ¿Para cuáles $n$ se tiene $\phi (n) = 100$?
+  \end{itemize}
+\end{problema}
+
+\begin{problema}
+  Demuestre que $\phi (n) \le n-1$ para $n \ge 2$, y la igualdad se cumple si y
+  solo si $n = p$ es primo.
+\end{problema}
+
+\begin{problema}[Congruencia de Euler]
+  \label{probl:congruencia-de-euler}
+  Sean
+  \[ (\ZZ/n\ZZ)^\times = \{ x_1, x_2, \ldots, x_{\phi (n)} \} \]
+  los residuos invertibles mód $n$.
+
+  \begin{enumerate}
+  \item[a)] Demuestre que si $x$ es también invertible, entonces
+    $$\{ x a_1, x x_2, \ldots, x x_{\phi (n)} \} = (\ZZ/n\ZZ)^\times.$$
+
+  \item[b)] Use el punto anterior para probar la congruencia de Euler:
+    $x^{\phi(n)} = 1$ para $x \in (\ZZ/n\ZZ)^\times$,
+    o de manera equivalente:
+    $$a^{\phi (n)} \equiv 1 \pmod{n} \quad \text{para }\mcd (a,n) = 1.$$
+  \end{enumerate}
+\end{problema}
+
+Note que la congruencia de Euler generaliza el pequeño teorema de Fermat.
+
+\begin{problema}
+  Demuestre las siguientes identidades para cualesquiera $m,n$:
+
+  \begin{enumerate}
+  \item[a)] $\phi (mn) = \phi (m)\,\phi (n) \, \frac{d}{\phi (d)}$,
+    donde $d = \mcd (m,n)$.
+
+  \item[b)] $\phi(\mcd (m,n)) \, \phi(\mcm (m,n)) = \phi(m)\,\phi(n)$.
+  \end{enumerate}
+\end{problema}
+
+\begin{problema}[Gauss]
+  Para $n \ge 1$ consideremos las fracciones
+  \[
+    \frac{1}{n}, ~
+    \frac{2}{n}, ~
+    \frac{3}{n}, ~
+    \ldots, ~
+    \frac{n-1}{n}, ~
+    \frac{n}{n}.
+  \]
+  Luego escribamos cada una de la forma $\frac{a}{b}$ con $\mcd(a,b) = 1$.
+
+  \begin{enumerate}
+  \item[a)] Demuestre que para cada $d \mid n$, el número de fracciones en la
+    lista con $d$ en el denominador es precisamente $\phi (d)$.
+
+  \item[b)] Deduzca la identidad $\sum_{d\mid n} \phi (d) = n$, donde la suma es
+    sobre todos los divisores de $n$.
+  \end{enumerate}
+\end{problema}
+
+\begin{ejemplo}
+  Para $n = 12$ tenemos
+  \[ \phi (1) + \phi (2) + \phi (3) + \phi (4) + \phi (6) + \phi (12) =
+    1 + 1 + 2 + 2 + 2 + 4 = 12. \]
+\end{ejemplo}
+
+\begin{problema}
+  Demuestre que un primo $p$ satisface $\phi (p) = 2\,\phi (p-1)$ si y solamente
+  si $p = 2^{2^k} + 1$ para algún $k$ (es decir, es un primo de Fermat).
+\end{problema}
+
+\begin{problema}
+  Calcule la suma de los números coprimos con $n$:
+  $$\sum_{\substack{1 \le t \le n \\ \mcd (t,n) = 1}} t = \frac{\phi(n)}{2}\,n.$$
+
+  Sugerencia: escriba la suma de dos maneras:
+  \[
+    \sum_{\substack{1 \le t \le n \\ \gcd (t,n) = 1}} t =
+    \sum_{\substack{1 \le n-t \le n \\ \gcd (n-t,n) = 1}} (n-t) =
+    \sum_{\substack{1 \le t \le n \\ \gcd (t,n) = 1}} (n-t).
+  \]
+\end{problema}
+
+\end{document}

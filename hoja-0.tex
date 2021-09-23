@@ -1,0 +1,144 @@
+\documentclass{article}
+
+\input{definitions}
+
+\title{Hoja 0: Residuos mód $n$ (breve repaso)}
+\author{Alexey Beshenov (cadadr@gmail.com)}
+\date{23 de septiembre de 2021}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{section}{2}
+
+\begin{definicion}
+  Fijemos algún $n = 1,2,3,\ldots$ y consideremos la siguiente relación sobre
+  los números enteros: se dice que $a$ y $b$ son \textbf{congruentes módulo $n$}
+  si $n$ divide a $a-b$:
+  $$a \equiv b \pmod{n} \iff n \mid (a-b).$$
+  En otras palabras, $a$ y $b$ tienen el mismo residuo de la división por $n$.
+\end{definicion}
+
+\begin{problema}
+  Demuestre que la congruencia mód $n$ es una relación de equivalencia:
+  para cualesquiera $a,b,c\in \ZZ$ se tiene
+  \[
+    a\equiv a, \quad
+    a\equiv b \Rightarrow b\equiv a, \quad
+    a\equiv b \text{ y } b\equiv c \Rightarrow a\equiv c.
+  \]
+\end{problema}
+
+\begin{definicion}
+  Las clases de equivalencia se llaman los \textbf{residuos módulo
+    $n$}\footnote{O también \textbf{residuos módulo $n$}.}. La clase de
+  equivalencia de $a$ será denotada por $[a]_n$, o simplemente por $[a]$:
+  $$[a]_n = [b]_n \iff a\equiv b \pmod{n}.$$
+  
+  El conjunto de los residuos mód $n$ se denota por $\ZZ/n\ZZ$. Note que este
+  tiene precisamente $n$ elementos, representados por los posibles residuos de
+  división por $n$:
+  $$\ZZ/n\ZZ = \{ [0], \, [1], \, \ldots, \, [n-1] \}.$$
+\end{definicion}
+
+\begin{problema}
+  Demuestre que si $a \equiv a'$, $b \equiv b'$, entonces
+  \[ a+b \equiv a'+b', \quad a\cdot b \equiv a'\cdot b'. \]
+
+  Esto quiere decir que la adición y multiplicación tiene sentido para los
+  residuos mód $n$: podemos definir
+  \[ [a] + [b] = [a+b], \quad [a]\cdot [b] = [a\cdot b]. \]
+\end{problema}
+
+En lugar de $[0]_n$ y $[1]_n$ será conveniente escribir simplemente $0$ y $1$.
+
+\begin{ejemplo}
+  He aquí las tablas de adición y multiplicación módulo $5$:
+  \[
+    \begin{array}{c|ccccc}
+      + & 0 & 1 & 2 & 3 & 4 \\
+      \hline
+      0 & 0 & 1 & 2 & 3 & 4 \\
+      1 & 1 & 2 & 3 & 4 & 0 \\
+      2 & 2 & 3 & 4 & 0 & 1 \\
+      3 & 3 & 4 & 0 & 1 & 2 \\
+      4 & 4 & 0 & 1 & 2 & 3
+    \end{array}
+    \quad\quad
+    \begin{array}{c|ccccc}
+      \cdot & 0 & 1 & 2 & 3 & 4 \\
+      \hline
+      0 & 0 & 0 & 0 & 0 & 0 \\
+      1 & 0 & 1 & 2 & 3 & 4 \\
+      2 & 0 & 2 & 4 & 1 & 3 \\
+      3 & 0 & 3 & 1 & 4 & 2 \\
+      4 & 0 & 4 & 3 & 2 & 1
+    \end{array}
+  \]
+\end{ejemplo}
+
+\begin{ejemplo}
+  He aquí las tablas de adición y multiplicación módulo $6$:
+  \[
+    \begin{array}{c|cccccc}
+      + & 0 & 1 & 2 & 3 & 4 & 5 \\
+      \hline
+      0 & 0 & 1 & 2 & 3 & 4 & 5 \\
+      1 & 1 & 2 & 3 & 4 & 5 & 0 \\
+      2 & 2 & 3 & 4 & 5 & 0 & 1 \\
+      3 & 3 & 4 & 5 & 0 & 1 & 2 \\
+      4 & 4 & 5 & 0 & 1 & 2 & 3 \\
+      5 & 5 & 0 & 1 & 2 & 3 & 4
+    \end{array}
+    \quad\quad
+    \begin{array}{c|cccccc}
+      \cdot & 0 & 1 & 2 & 3 & 4 & 5 \\
+      \hline
+      0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+      1 & 0 & 1 & 2 & 3 & 4 & 5 \\
+      2 & 0 & 2 & 4 & 0 & 2 & 4 \\
+      3 & 0 & 3 & 0 & 3 & 0 & 3 \\
+      4 & 0 & 4 & 2 & 0 & 4 & 2 \\
+      5 & 0 & 5 & 4 & 3 & 2 & 1
+    \end{array}
+  \]
+\end{ejemplo}
+
+\begin{problema}
+  Demuestre que las ecuaciones
+  $$3x^2 + 2 = y^2, \quad 7x^3 + 2 = y^3$$
+  no tienen soluciones $x,y \in \ZZ$, usando reducción módulo algunos $p$.
+\end{problema}
+
+\begin{problema}
+  \label{probl:pequeno-Fermat}
+  Sea $p$ un número primo.
+
+  \begin{enumerate}
+  \item[a)] Demuestre que $p\mid {p\choose k}$ para $k = 1,2,\ldots,p-1$.
+
+  \item[b)] Deduzca de a) que ${p-1\choose k} \equiv (-1)^k \pmod{p}$.
+
+  \item[c)] Deduzca de a) la <<fórmula del binomio mód $p$>>:
+    $$(a+b)^p \equiv a^p + b^p \pmod{p}$$
+    para cualesquiera $a,b \in \ZZ$.
+
+  \item[d)] Deduzca de c) el \textbf{pequeño teorema de Fermat}:
+    $a^p \equiv a \pmod{p}$ para todo $a \in \ZZ$.
+
+    Sugerencia: use inducción con caso base $a = 0$ y el paso inductivo mediante
+    $(a+1)^p \equiv a^p + 1 \pmod{p}$.
+  \end{enumerate}
+\end{problema}
+
+\begin{problema}
+  Demuestre las siguientes congruencias mód $p$:
+  \begin{align*}
+    1 + 2 + 3 + \cdots + (p-1) & \equiv 0 \text{ para }p \ne 2,\\
+    1^2 + 2^2 + 3^2 + \cdots + (p-1)^2 & \equiv 0 \text{ para }p \ne 2,3,\\
+    1^3 + 2^3 + 3^3 + \cdots + (p-1)^3 & \equiv 0 \text{ para }p \ne 2.
+  \end{align*}
+\end{problema}
+
+\end{document}

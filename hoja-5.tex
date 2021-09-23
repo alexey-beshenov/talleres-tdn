@@ -1,0 +1,84 @@
+\documentclass{article}
+
+\input{definitions}
+
+\title{Hoja 5: Orden multiplicativo mód $n$}
+\author{Alexey Beshenov (cadadr@gmail.com)}
+\date{23 de septiembre de 2021}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\setcounter{section}{5}
+
+\begin{problema}
+  Consideremos $x \in (\ZZ/n\ZZ)^\times$.
+
+  \begin{enumerate}
+  \item[a)] Demuestre que existen $k > \ell$ tales que $x^k = x^\ell$ en
+    $(\ZZ/n\ZZ)^\times$.
+
+  \item[b)] Concluya que $x^k = 1$ para algún $k = 1,2,3,\ldots$
+  \end{enumerate}
+\end{problema}
+
+\begin{definicion}
+  Sea $x \in (\ZZ/n\ZZ)^\times$ un residuo invertible mód $n$. Su \textbf{orden}
+  (\textbf{multiplicativo}) es el mínimo $k = 1,2,3,\ldots$ tal que $x^k = 1$.
+\end{definicion}
+
+\begin{ejemplo}
+  Consideremos las potencias de $2$ módulo $5$:
+  \[
+    2^2 = 4, ~
+    2^3 \equiv 3, ~
+    2^4 \equiv 1 \pmod{5}.
+  \]
+  Entonces, $[2]_5$ tiene orden $4$. Por otra parte, módulo $7$ tenemos
+  \[
+    2^2 = 4, ~
+    2^3 = 8 \equiv 1 \pmod{7}.
+  \]
+  Esto significa que el orden de $[2]_7$ es $2$.
+\end{ejemplo}
+
+\begin{problema}
+  Para $x \in (\ZZ/n\ZZ)^\times$, sea $k = \ord (x)$.
+
+  \begin{enumerate}
+  \item[a)] Si $\ell = qk + r$, demuestre que $x^\ell = 1$ si y solamente si
+    $x^r = 1$.
+
+  \item[b)] Deduzca que $x^\ell = 1$ si y solamente si $\ell \mid k$.
+
+    (Use la división $k = q\ell + r$.)
+
+  \item[c)] Demuestre que $\ord (x) \mid \phi(n)$ para todo
+    $x \in (\ZZ/n\ZZ)^\times$.
+
+    (Recuerde la congruencia de Euler.)
+
+  \item[d)] Demuestre que $x^\ell = x^m$ si y solamente si
+    $\ell \equiv m \pmod{k}$.
+  \end{enumerate}
+\end{problema}
+
+\begin{problema}
+  Para $x \in (\ZZ/n\ZZ)^\times$ y $\ell = 1,2,3,\ldots$ deduzca la fórmula
+  $$\ord (x^\ell) = \frac{\ord (x)}{\mcd (\ord (x), \ell)}.$$
+\end{problema}
+
+\begin{problema}
+  Consideremos $x,y \in (\ZZ/n\ZZ)^\times$.
+
+  \begin{itemize}
+  \item[a)] Demuestre que $\ord (xy) = \ord(x) \, \ord(y)$ si
+    $\mcd (\ord(x), \ord(y)) = 1$.
+  \item[b)] ¿Qué pasa si $\mcd (\ord(x), \ord(y)) \ne 1$?
+  \end{itemize}
+\end{problema}
+
+\end{document}

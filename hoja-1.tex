@@ -1,0 +1,105 @@
+\documentclass{article}
+
+\input{definitions}
+
+\title{Hoja 1: Residuos invertibles mód $n$}
+\author{Alexey Beshenov (cadadr@gmail.com)}
+\date{23 de septiembre de 2021}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\setcounter{section}{1}
+
+\begin{definicion}
+  Se dice que un residuo $x \in \ZZ/n\ZZ$ es \textbf{invertible} si existe otro
+  residuo $y \in \ZZ/n\ZZ$ tal que $xy = 1$. En este caso también se escribe
+  $y = x^{-1}$.
+
+  De manera equivalente, $a \in \ZZ$ es \textbf{invertible mód $n$} si existe
+  $b \in \ZZ$ tal que $ab \equiv 1 \pmod{n}$.
+\end{definicion}
+
+El conjunto de los residuos invertibles módulo $n$ se denotará por
+$(\ZZ/n\ZZ)^\times$.
+
+\begin{ejemplo}
+  He aquí los residuos módulo $n = 15$ y sus inversos; <<--->> significa que el
+  residuo no es invertible.
+
+  \begin{center}
+    \begin{tabular}{ccccccccccccccc}
+      \hline
+      $0$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ & $12$ & $13$ & $14$ \\
+      \hline
+      --- & $1$ & $8$ & --- & $4$ & --- & --- & $13$ & $2$ & --- & --- & $11$ & --- & $7$ & $14$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{ejemplo}
+
+\begin{problema}
+  Demuestre que si $x, y \in (\ZZ/n\ZZ)^\times$ son residuos invertibles mód
+  $n$, entonces $x^{-1}$ y $xy$ son también invertibles.
+\end{problema}
+
+\begin{problema}[Cancelación]
+  Demuestre que si $x,y,z$ son residuos módulo $n$, y $z$ es invertible,
+  entonces $xz = yz$ implica que $x = y$. ¿Qué pasa si $z$ no es invertible?
+\end{problema}
+
+\begin{problema}
+  \label{probl:invertible-coprimo}
+  En este problema vamos a probar que $[a]_n$ es invertible si y solo si
+  $\mcd (a,n) = 1$:
+  \[ (\ZZ/n\ZZ)^\times = \{ [a]_n \mid 0 \le a < n, ~ \mcd (a,n) = 1 \}. \]
+
+  \begin{enumerate}
+  \item[a)] Si $\mcd (a,n) = 1$, use la identidad de Bézout para encontrar
+    $[a]_n^{-1}$.
+
+  \item[b)] Demuestre que si $x,y \in \ZZ/n\ZZ$ son dos residuos no nulos tales
+    que $xy = 0$, entonces $x$ e $y$ no pueden ser invertibles.
+
+    (En otras palabras, si $n \mid ab$ para $n \nmid a$, $n \nmid b$, entonces
+    $a$ y $b$ no son invertibles módulo $n$.)
+
+  \item[c)] Si $\mcd (a,n) > 1$, use el punto anterior para probar que $a$ no es
+    invertible mód $n$.
+  \end{enumerate}
+\end{problema}
+
+\begin{problema}
+  Para $n = 5, 6, 7, 8$ encuentre cuáles residuos mód $n$ son invertibles y
+  escriba sus inversos correspondientes.
+\end{problema}
+
+\begin{problema}
+  Calcule $[6]_{385}^{-1}$.
+\end{problema}
+
+\begin{problema}[Teorema de Wilson]
+  \label{probl:Wilson-1}
+  Sea $p$ un primo.
+
+  \begin{enumerate}
+  \item[a)] Demuestre que para todo $x \in (\ZZ/p\ZZ)^\times$ se tiene
+    $x^{-1} = x$ si y solamente si $x = \pm 1$.
+
+  \item[b)] Deduzca de a) que $(p - 1)! \equiv -1 \pmod{p}$.
+
+  \item[c)] Demuestre que $(n-1)! \equiv 0 \pmod{n}$ si $n \ge 6$ es compuesto.
+  \end{enumerate}
+\end{problema}
+
+\begin{problema}
+  Demuestre que para todo primo impar $p$, el numerador de
+  $$1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{p-1}$$
+  es divisible por $p$.
+
+  Sugerencia: $1, 2, \ldots, p-1$ son invertibles mód $p$.
+\end{problema}
+
+\end{document}

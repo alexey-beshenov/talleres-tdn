@@ -1,0 +1,124 @@
+\documentclass{article}
+
+\input{definitions}
+
+\title{Hoja 2: Teorema chino del residuo}
+\author{Alexey Beshenov (cadadr@gmail.com)}
+\date{23 de septiembre de 2021}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\setcounter{section}{2}
+
+\begin{problema}[Teorema chino del residuo]
+  Sean $m$ y $n$ dos enteros coprimos ($\mcd (m,n) = 1$).
+
+  \begin{itemize}
+  \item[a)] Demuestre que existen enteros $e_1$, $e_2$ tales que
+    \begin{gather*}
+      e_1 \equiv 1 \pmod{m}, \quad e_1 \equiv 0 \pmod{n}, \\
+      e_2 \equiv 0 \pmod{m}, \quad e_2 \equiv 1 \pmod{n}.
+    \end{gather*}
+    Sugerencia: identidad de Bézout.
+
+  \item[b)] Dados $a, b \in \ZZ$, encuentre $c$ tal que
+    $$c \equiv a \pmod{m}, \quad c \equiv b \pmod{n}.$$
+  \end{itemize}
+\end{problema}
+
+Podemos reformular el resultado de arriba de la siguiente manera.
+
+\begin{framed}
+  Para $\mcd (m,n) = 1$ la aplicación
+  \begin{align*}
+    \Phi\colon \ZZ/mn\ZZ & \to \ZZ/m\ZZ \times \ZZ/n\ZZ,\\
+    [c]_{mn} & \mapsto ([c]_m, \, [c]_n)
+  \end{align*}
+  es biyectiva.
+\end{framed}
+
+\begin{proof}
+  Acabamos de probar que para todo par de residuos $([a]_m, [b]_n)$ habrá
+  $[c]_{mn}$ tal que $\Phi ([c]_{mm}) = ([a]_m,[b]_n)$.  Además, usando que
+  $$|\ZZ/mn\ZZ| = |\ZZ/m\ZZ \times \ZZ/n\ZZ| = |\ZZ/m\ZZ| \times |\ZZ/n\ZZ|,$$
+  podemos concluir que $\Phi$ es también inyectiva.
+\end{proof}
+
+\begin{ejemplo}
+  He aquí la aplicación $\Phi$ para $(m,n) = (2,3)$:
+  \begin{gather*}
+    \Phi\colon \ZZ/6\ZZ \to \ZZ/2\ZZ \times \ZZ/3\ZZ,\\
+    0 \mapsto (0,0), ~
+    1 \mapsto (1,1), ~
+    2 \mapsto (0,2), ~
+    3 \mapsto (1,0), ~
+    4 \mapsto (0,1), ~
+    5 \mapsto (1,2).
+  \end{gather*}
+\end{ejemplo}
+
+\begin{problema}
+  \label{probl:crt-invertibles}
+  Demuestre que la biyección
+  $$\Phi\colon \ZZ/mn\ZZ \to \ZZ/m\ZZ \times \ZZ/n\ZZ$$
+  se restringe a una biyección entre los elementos invertibles
+  \begin{align*}
+    (\ZZ/mn\ZZ)^\times & \to (\ZZ/m\ZZ)^\times \times (\ZZ/n\ZZ)^\times, \\
+    [a]_{mn} & \mapsto ([a]_m, [a]_n).
+  \end{align*}
+\end{problema}
+
+\begin{problema}
+  Formule y demuestre una versión del teorema chino del residuo para módulos
+  $n_1, \ldots, n_s$ tales que $\mcd (n_i,n_j) = 1$ para $i \ne j$.
+\end{problema}
+
+\begin{problema}
+  Sea $f (x) = a_m\,x^m + \cdots + a_1\,x + a_0$ un polinomio con coeficientes
+  enteros.
+
+  \begin{enumerate}
+  \item[a)] Demuestre que la congruencia $f (x) \equiv 0 \pmod{n}$ tiene
+    solución para $n = p_1^{e_1} \cdots p_s^{e_s}$ si y solamente si
+    $f (x) \equiv 0 \pmod{p_i^{e_i}}$ tiene solución para cada $i = 1,\ldots,s$.
+
+  \item[b)] Sea $N$ el número de soluciones de $f (x) \equiv 0 \pmod{n}$ y $N_i$
+    el número de soluciones de $f (x) \equiv 0 \pmod{p_i^{e_i}}$. Demuestre que
+    $N = N_1 \cdots N_s$.
+  \end{enumerate}
+\end{problema}
+
+\begin{problema}
+  ~
+
+  \begin{enumerate}
+  \item[a)] Demuestre que $x^2 \equiv x \pmod{p^e}$ tiene únicas soluciones
+    $x = 0$ y $1$ para todo primo $p$ y $e = 1,2,3,\ldots$
+
+  \item[b)] En general, ¿cuántas soluciones tiene $x^2 \equiv x \pmod{n}$?
+  \end{enumerate}
+\end{problema}
+
+\begin{problema}
+  ~
+
+  \begin{enumerate}
+  \item[a)] Demuestre que $x^2 \equiv 1 \pmod{p^e}$ tiene únicas soluciones
+    $x = \pm 1$ para $p$ impar y $e = 1,2,3,\ldots$
+
+  \item[b)] Demuestre que $x^2 \equiv 1 \pmod{2^e}$ tiene $4$ soluciones para
+    $e \ge 3$. ¿Cuáles son?
+
+  \item[c)] En general, ¿cuántas soluciones tiene $x^2 \equiv 1 \pmod{n}$?
+  \end{enumerate}
+\end{problema}
+
+\begin{problema}
+  Use el teorema chino del residuo para encontrar las soluciones de
+  $x^2 \equiv x$ y $x^2 \equiv 1$ mód $n = 221$.
+\end{problema}
+
+\end{document}
