@@ -1,0 +1,378 @@
+\ifdefined\handout
+  \documentclass[handout]{beamer}
+\else
+  \documentclass{beamer}
+\fi
+
+\usetheme{boxes}
+\definecolor{beamer@structure@color}{rgb}{0,0,0}
+
+\usecolortheme{structure}
+
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{frametitle}{\color{black}
+\def\myhrulefill{\leavevmode\leaders\hrule height 1pt\hfill\kern 0pt}
+\headingfont\insertframetitle\par\vskip-8pt\myhrulefill}
+
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{babel}
+\usetikzlibrary{decorations.pathmorphing,shapes}
+
+\newcommand*{\longhookrightarrow}{\ensuremath{\lhook\joinrel\relbar\joinrel\rightarrow}}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\DeclareMathOperator{\fchar}{char}
+
+\renewcommand{\AA}{\mathbb{A}}
+
+\DeclareMathOperator{\mcd}{mcd}
+
+\setbeamertemplate{navigation symbols}{}
+
+\definecolor{shadecolor}{rgb}{0.89,0.89,0.89}
+
+\usepackage{mathspec}
+\setsansfont[BoldFont={IBM Plex Sans Bold}, ItalicFont={IBM Plex Sans Italic}]{IBM Plex Sans}
+\setmathrm[BoldFont={IBM Plex Sans Bold}, ItalicFont={IBM Plex Sans Italic}]{IBM Plex Sans}
+\newfontfamily\headingfont[]{IBM Plex Sans Bold}
+
+\setbeamercovered{transparent=25}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[noframenumbering]
+  \begin{center}
+    {\LARGE\bf Residuos módulo n
+
+    }
+
+    \vspace{3em}
+
+    {\large\bf Alexey Beshenov}
+
+    \vspace{4em}
+
+    23/09/2021
+
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Congruencias}
+
+  \begin{itemize}
+    \item<2-> Congruencia mód $n$:
+      \[ a \equiv b \pmod{n} \iff n \mid (a-b). \]
+
+    \item<3-> Relación de equivalencia:
+      \[
+        a\equiv a, \quad
+        a\equiv b \Rightarrow b\equiv a, \quad
+        a\equiv b \text{ y } b\equiv c \Rightarrow a\equiv c.
+      \]
+
+    \item<4-> Residuos mód n = clases de equivalencia:
+      $$[a]_n = [b]_n \iff a\equiv b \pmod{n}.$$
+
+    \item<5-> Conjunto de residuos mód n:
+      $$\ZZ/n\ZZ = \{ [0], \, [1], \, \ldots, \, [n-1] \}.$$
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Aritmética de residuos}
+
+  \begin{itemize}
+  \item<2-> Si $a \equiv a'$, $b \equiv b'$, entonces
+    \[ a+b \equiv a'+b', \quad a\cdot b \equiv a'\cdot b'. \]
+
+  \item<3-> Podemos poner
+    \[ [a]_n + [b]_n = [a+b]_n, \quad [a]_n\cdot [b]_n = [a\cdot b]_n. \]
+  \end{itemize}  
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Módulo 5}
+
+    \[
+    \begin{array}{c|ccccc}
+      + & 0 & 1 & 2 & 3 & 4 \\
+      \hline
+      0 & 0 & 1 & 2 & 3 & 4 \\
+      1 & 1 & 2 & 3 & 4 & 0 \\
+      2 & 2 & 3 & 4 & 0 & 1 \\
+      3 & 3 & 4 & 0 & 1 & 2 \\
+      4 & 4 & 0 & 1 & 2 & 3
+    \end{array}
+    \quad\quad
+    \begin{array}{c|ccccc}
+      \times & 0 & 1 & 2 & 3 & 4 \\
+      \hline
+      0 & 0 & 0 & 0 & 0 & 0 \\
+      1 & 0 & 1 & 2 & 3 & 4 \\
+      2 & 0 & 2 & 4 & 1 & 3 \\
+      3 & 0 & 3 & 1 & 4 & 2 \\
+      4 & 0 & 4 & 3 & 2 & 1
+    \end{array}
+  \]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Módulo 6}
+
+  \[
+    \begin{array}{c|cccccc}
+      + & 0 & 1 & 2 & 3 & 4 & 5 \\
+      \hline
+      0 & 0 & 1 & 2 & 3 & 4 & 5 \\
+      1 & 1 & 2 & 3 & 4 & 5 & 0 \\
+      2 & 2 & 3 & 4 & 5 & 0 & 1 \\
+      3 & 3 & 4 & 5 & 0 & 1 & 2 \\
+      4 & 4 & 5 & 0 & 1 & 2 & 3 \\
+      5 & 5 & 0 & 1 & 2 & 3 & 4
+    \end{array}
+    \quad\quad
+    \begin{array}{c|cccccc}
+      \times & 0 & 1 & 2 & 3 & 4 & 5 \\
+      \hline
+      0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+      1 & 0 & 1 & 2 & 3 & 4 & 5 \\
+      2 & 0 & 2 & 4 & 0 & 2 & 4 \\
+      3 & 0 & 3 & 0 & 3 & 0 & 3 \\
+      4 & 0 & 4 & 2 & 0 & 4 & 2 \\
+      5 & 0 & 5 & 4 & 3 & 2 & 1
+    \end{array}
+  \]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Residuos invertibles}
+
+  \begin{itemize}
+  \item<2-> $x \in \ZZ/n\ZZ$ es \textbf{invertible} si existe $y \in \ZZ/n\ZZ$ tal
+    que $xy = 1$.
+
+  \item<3-> Equivalente: $a \in \ZZ$ es \textbf{invertible mód $n$} si existe
+    $b \in \ZZ$ tal que $ab \equiv 1 \pmod{n}$.
+
+  \item<4-> Ejemplo: mód 15
+    \begin{center}
+      \begin{tabular}{rcccccccc}
+        \hline
+        $x\colon$ & $1$ & $2$ & $4$ & $7$ & $8$ & $11$ & $13$ & $14$ \\
+        \hline
+        $x^{-1}\colon$ & $1$ & $8$ & $4$ & $13$ & $2$ & $11$ & $7$ & $14$ \\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    $0, 3, 5, 6, 9, 10, 12$ no son invertibles
+
+    (¿qué tienen en común?)
+
+  \item<5-> $(\ZZ/n\ZZ)^\times$ = el conjunto de residuos invertibles mód $n$.
+
+  \item<6-> Ejercicio (!):
+    $$(\ZZ/n\ZZ)^\times = \{ [a]_n \mid 0 \le a < n, ~ \mcd (a,n) = 1 \}.$$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Teorema chino del residuo}
+
+  \begin{itemize}
+  \item<2-> Sean $m,n$ enteros coprimos ($\mcd (m,n) = 1$).
+
+    Ejercicio (!): para cualesquiera $a,b \in \ZZ$ existe $c$ tal que
+    $$c \equiv a \pmod{m}, \quad c \equiv b \pmod{n}.$$
+
+  \item<3-> Significado: la aplicación
+    \begin{align*}
+      \Phi\colon \ZZ/mn\ZZ & \to \ZZ/m\ZZ \times \ZZ/n\ZZ,\\
+      [c]_{mn} & \mapsto ([c]_m, \, [c]_n)
+    \end{align*}
+    es sobreyectiva. De hecho, biyectiva:
+    $$|\ZZ/mn\ZZ| = |\ZZ/m\ZZ \times \ZZ/n\ZZ| = |\ZZ/m\ZZ| \times |\ZZ/n\ZZ|.$$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Ejemplo: $(m,n) = (2,3)$}
+
+  \begin{align*}
+    \Phi\colon \ZZ/6\ZZ & \to \ZZ/2\ZZ \times \ZZ/3\ZZ, \\
+    0 & \mapsto (0,0), \\
+    1 & \mapsto (1,1), \\
+    2 & \mapsto (0,2), \\
+    3 & \mapsto (1,0), \\
+    4 & \mapsto (0,1), \\
+    5 & \mapsto (1,2).
+  \end{align*}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Consecuencias importantes (ejercicio)}
+
+  \begin{itemize}
+  \item<2-> Versión similar con $m_1, \ldots, m_s$, $\mcd (m_i,m_j) = 1$.
+
+  \item<3-> $f (x) \equiv 0 \pmod{n}$ tiene
+    solución para $n = p_1^{e_1} \cdots p_s^{e_s}$ si y solamente si
+    $f (x) \equiv 0 \pmod{p_i^{e_i}}$ tiene solución para cada $i = 1,\ldots,s$.
+
+  \item<4-> $N$ = número de soluciones de $f (x) \equiv 0 \pmod{n}$.
+
+    $N_i$ = número de soluciones de $f (x) \equiv 0 \pmod{p_i^{e_i}}$.
+
+    Luego, $N = N_1 \cdots N_s$.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Ejemplo: $x^2 \equiv 1 \pmod{40}$}
+
+  \begin{itemize}
+  \item<2-> mód $8$: cuatro soluciones 
+    $$1^2 \equiv 3^2 \equiv 5^2 \equiv 7^2 \equiv 1 \pmod{8}.$$
+
+  \item<3-> mód $5$: dos soluciones esperadas $x \equiv \pm 1$.
+
+  \item<4-> mód $40$: ocho soluciones:
+
+    \begin{align*}
+      \ZZ/40\ZZ & \to \ZZ/8\ZZ \times \ZZ/5\ZZ, \\
+      1 & \mapsto (1, 1), \\
+      9 & \mapsto (1, 4), \\
+      11 & \mapsto (3, 1), \\
+      19 & \mapsto (3, 4), \\
+      21 & \mapsto (5, 1), \\
+      29 & \mapsto (5, 4), \\
+      31 & \mapsto (7, 1), \\
+      39 & \mapsto (7, 4).
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Ejemplo: $x^2 \equiv 1 \pmod{40}$ (cont.)}
+
+  \begin{itemize}
+  \item<2-> Sabiendo, que las soluciones mód $8$ son $1,3,5,7$,\\
+    las soluciones mód $5$ son $1,4$,\\
+    ¿cómo reconstruir las soluciones mód $40$?
+
+  \item<3-> Bézout:
+    $$2\cdot 8 + (-3)\cdot 5 = 1$$
+    y luego
+    \begin{align*}
+      16 & \equiv 0 \pmod{8}, & \quad 16 & \equiv 1 \pmod{5}, \\
+      -15 & \equiv 1 \pmod{8}, & \quad -15 & \equiv 0 \pmod{5}.
+    \end{align*}
+
+  \item<4-> Por ejemplo, buscamos $x$ tal que
+    \[ x \equiv 5 \pmod{8}, \quad x \equiv 4 \pmod{5}. \]
+
+    Entonces,
+    \[ x = 5\cdot (-15) + 4\cdot 16 = -11 \equiv 29 \pmod{40}. \]
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Función $\phi$ de Euler}
+
+  \begin{itemize}
+  \item<2-> Número de residuos invertibles mód $n$ / coprimos con $n$:
+    \begin{align*}
+      \phi (n) & = \# (\ZZ/n\ZZ)^\times, \\
+               & = \# \{ 1 \le a < n \mid \mcd (a,n) = 1 \}.
+    \end{align*}
+
+  \item<3-> Consecuencia del teorema chino del residuo:
+    \begin{align*}
+      (\ZZ/mn\ZZ)^\times & \cong (\ZZ/m\ZZ)^\times \times (\ZZ/n\ZZ)^\times \text{ para }\mcd(m,n) = 1,\\
+      \phi (mn) & = \phi (m)\,\phi(n) \text{ para }\mcd(m,n) = 1.
+    \end{align*}
+
+  \item<4-> Ejercicio:
+    \begin{align*}
+      \phi (p^e) & = p^e - p^{e-1} = p^e\,\left(1 - \frac{1}{p}\right), \\
+      \phi (n) & = n\,\prod_{p \mid n} \left(1 - \frac{1}{p}\right).
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Identidad curiosa / importante}
+
+  \begin{itemize}
+  \item<2-> Ejercicio:
+    \[ \sum_{d\mid n} \phi (d) = n. \]
+
+  \item<3-> Ejemplo:
+    \begin{align*}
+      12 & = 1 + 1 + 2 + 2 + 2 + 4 \\
+         & = \phi (1) + \phi (2) + \phi (3) + \phi (4) + \phi (6) + \phi (12).
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Congruencia de Euler}
+
+  \begin{itemize}
+  \item<2-> $x^{\phi(n)} = 1$ para $x \in (\ZZ/n\ZZ)^\times$.
+
+  \item<3-> $a^{\phi (n)} \equiv 1 \pmod{n}$ para $\mcd (a,n) = 1$.
+
+  \item<4-> Generaliza el pequeño teorema de Fermat:
+    $$a^{p-1} \equiv 1 \pmod{p} \text{ para } p\nmid a.$$
+
+  \item<5-> Ejemplo: $n \mid 2^{(n-1)!}-1$ para $n$ impar.
+
+    Razón: $\phi (n) \le n-1$, y entonces $\phi (n) \mid (n-1)!$
+
+    Para $n = 5$:
+    \[ 2^{4!} - 1 = 16777215 = 3^2 \cdot 5 \cdot 7 \cdot 13 \cdot 17 \cdot 241. \]
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge Continuará\dots}
+  \end{center}
+\end{frame}
+
+\end{document}
