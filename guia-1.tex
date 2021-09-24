@@ -277,22 +277,32 @@ Para las soluciones, véase
   Sugerencia: si $N$ es el número de $n$-ágonos, entonces
   $N\cdot (n-2)\,\frac{\pi}{n} = 2\pi$. (¿Por qué?)
 
-%   \ifdefined\solutions\begin{solucion}
-%     An internal angle of a regular $n$-gon is $(n-2)\,\frac{\pi}{n}$. On the other hand, the sum the internal angles of $N$ adjacent polygons around the vertex should be $2\pi$. We have therefore $N\cdot (n-2)\,\frac{\pi}{n} = 2\pi$. This leaves the equation $N = \frac{2n}{n-2}$ for $N,n\in \ZZ$. In particular, $(n,N) = (3,6), (4,4), (6,3)$ are solutions, and we would like to see that there are no other solutions. The function $f (n) = \frac{2n}{n-2}$ for $n \ge 3$ is strictly decreasing, and $f (n) \xrightarrow{n\to \infty} 2$. We calculate
-% $$f (3) = 6, \quad f (4) = 4, \quad f (5) = \frac{10}{3}, \quad f (6) = 3, \quad f (7) = \frac{14}{5} < 3,$$
-% so that $2 < f (n) < 3$ for $n \ge 7$. This allows us to conclude that the only
-% integral values are $f (3) = 6$, $f (4) = 4$, $f (6) = 3$.
-% \end{solucion}\fi
+  \ifdefined\solutions\begin{solucion}
+
+    Un ángulo del $n$-ágono regular mide $(n-2)\,\frac{\pi}{n}$. Por otra parte,
+    la suma de $N$ estos ángulos alrededor del punto debe ser $2\pi$. Tenemos
+    entonces $N\cdot (n-2)\,\frac{\pi}{n} = 2\pi$. Esto nos deja la ecuación
+    $N = \frac{2n}{n-2}$. Hay que ver que $(n,N) = (3,6), (4,4), (6,3)$ son las
+    únicas soluciones. La función $f (n) = \frac{2n}{n-2}$ decrece para
+    $n \ge 3$, y además $f (n) \xrightarrow{n\to \infty} 2$. Calculamos que
+    $$f (3) = 6, \quad f (4) = 4, \quad f (5) = \frac{10}{3}, \quad f (6) = 3, \quad f (7) = \frac{14}{5} < 3,$$
+    así que $2 < f (n) < 3$ para $n \ge 7$. Entonces, los únicos valores enteros
+    son $f (3) = 6$, $f (4) = 4$, $f (6) = 3$.
+  \end{solucion}\fi
  \end{problema}
 
  \begin{problema}
    Demuestre que si $a^n - 1$ es primo, entonces $a = 2$ y $n$ es primo.
 
-%   \ifdefined\solutions\begin{solucion}
-%     Assume that there exists an odd prime $p \mid n$. Then we may write $m = n/p$ and
-% $$a^n - 1 = (a^m)^p + 1^p = (a^m + 1)\,(a^{m\,(p-1)} + a^{m\,(p-2)} + \cdots + 1),$$
-% and we should have $a = 2$ and $n = p$, because otherwise $a^m - 1 > 1$ and the number is not prime.
-%   \end{solucion}\fi
+   \ifdefined\solutions\begin{solucion}
+     Si $p \mid n$ para un primo impar $p$, entonces escribiendo $m = n/p$,
+     se obtiene
+     $$a^n - 1 = (a^m)^p + 1^p = (a^m + 1)\,(a^{m\,(p-1)} + a^{m\,(p-2)} + \cdots + 1),$$
+     y necesariamente $a = 2$ y $n = p$.
+
+     Un lema muy útil: para $a > 2$ tenemos $a^m - 1 \mid a^n - 1$ si y
+     solamente si $m \mid n$ (¡demuéstrelo!)
+   \end{solucion}\fi
 \end{problema}
 
 \begin{comentario}
@@ -374,59 +384,6 @@ Para las soluciones, véase
   \item[b)] Concluya que los números $2^2 + 1$, $2^{2^2} + 1$, $2^{2^3} + 1$,
     $\ldots$ son coprimos por pares.
   \end{enumerate}
-
-  % \ifdefined\solutions\begin{solucion}
-  %   For $n > m$ we show that $\gcd (a^{2^n} + 1, a^{2^m} + 1) = 1$ or $2$ depending on whether $a$ is odd or even.
-
-  %   Note that
-  %   $$x^{2^n} - 1 = (x-1)\,(x+1)\,(x^2 + 1)\,(x^4 + 1)\,(x^8 + 1)\cdots (x^{2^{n-1}} + 1).$$
-  %   This is easily proved by induction on $n$. It follows that if $n > m$, then $(a^{2^m} + 1) \mid (a^{2^n} - 1)$. In particular, if $p$ is an odd prime such that $p \mid (a^{2^n} + 1)$ and $p \mid (a^{2^m} + 1)$, then $p \mid (a^{2^n} - 1)$. However, this contradicts the fact that
-  %   $$\gcd (a^{2^n} + 1, a^{2^n} - 1) = \begin{cases}
-  %     1, & a \text{ is even},\\
-  %     2, & a \text{ is odd}.
-  %   \end{cases}$$
-  %   The very same reasoning shows that if $2^k \mid (a^{2^n} + 1)$ and $2^k \mid (a^{2^m} + 1)$, then $k = 1$. This allows us to conclude that
-  %   \[ \gcd (a^{2^n} + 1, a^{2^m} + 1) = \begin{cases}
-  %       1, & a \text{ is even},\\
-  %       2, & a \text{ is odd}.
-  %     \end{cases} \]
-  % \end{solucion}\fi
-\end{problema}
-
-\begin{problema}[Congruencia de Euler]
-  Para $n > 1$ sean
-  $$a_1, a_2, \ldots, a_{\phi (n)}$$
-  números que recorren diferentes restos módulo $n$ con $\mcd (a_i,n) = 1$.
-
-  \begin{enumerate}
-  \item[a)] Demuestre que si $\mcd (a,n) = 1$, entonces los números
-    $$aa_1, aa_2, \ldots, aa_{\phi (n)}$$
-    también recorren diferentes restos módulo $n$ con $\mcd (a_i,n) = 1$.
-
-  \item[b)] Use el punto anterior para probar la congruencia de Euler:
-    $$a^{\phi (n)} \equiv 1 \pmod{n} \quad \text{para }\mcd (a,n) = 1.$$
-  \end{enumerate}
-
-  % \ifdefined\solutions\begin{solucion}
-  %   Assume that $a a_i \equiv a a_j \pmod{n}$, where $\gcd (a,n) = 1$. Then
-  %   thanks to Bézout's identity $ab + nc = 1$, we conclude that there exists $b$
-  %   such that $ab \equiv 1 \pmod{n}$. Multiplying the congruence
-  %   $a a_i \equiv a a_j \pmod{n}$ by $b$, we conclude that
-  %   $a_i \equiv a_j \pmod{n}$. This shows that
-  %   $aa_1, aa_2, \ldots aa_{\phi (n)}$ are pairwise incongruent. Moreover, if
-  %   $\gcd (a_i,n) = \gcd (a,n) = 1$, then $\gcd (a a_i, n) = 1$.
-
-  %   \vspace{1em}
-
-  %   Let $a_1,a_2,\ldots,a_{\phi (n)}$ be a reduced residue system modulo
-  %   $n$. Then for $a$ such that $\gcd (a,n) = 1$, we checked that
-  %   $aa_1, aa_2, \ldots aa_{\phi (n)}$ is another reduced residue system. But
-  %   multiplication by $a$ just permutes the corresponding residues modulo $n$,
-  %   so that
-  %   $$a_1\cdots a_{\phi (n)} \equiv a^{\phi (n)}\,a_1\cdots a_{\phi (n)} \pmod{n}.$$
-  %   Each $a_i$ is invertible modulo $n$, so we may cancel these terms to
-  %   conclude that $a^{\phi (n)} \equiv 1 \pmod{n}$.
-  % \end{solucion}\fi
 \end{problema}
 
 \pagebreak
@@ -460,21 +417,6 @@ Para las soluciones, véase
   \end{enumerate}
 \end{problema}
 
-\begin{problema}[Teorema chino del resto]
-  Sean $m$ y $n$ dos enteros coprimos ($\mcd (m,n) = 1$).
-
-  \begin{itemize}
-  \item[a)] Demuestre que existen enteros $x$, $y$ tales que
-    \begin{gather*}
-      x \equiv 1 \pmod{m}, \quad x \equiv 0 \pmod{n}, \\
-      y \equiv 0 \pmod{m}, \quad y \equiv 1 \pmod{n}.
-    \end{gather*}
-
-  \item[b)] Dados $a, b \in \ZZ$, encuentre $z$ tal que
-    $$z \equiv a \pmod{m}, \quad z \equiv b \pmod{n}.$$
-  \end{itemize}
-\end{problema}
-
 \begin{problema}
   Para un entero $n$ y un parámetro natural $k = 0,1,2,\ldots$, definamos
   $$\sigma_k (n) = \sum_{\substack{1 \le d \le n \\ d \mid n}} d^k.$$
@@ -494,23 +436,6 @@ Para las soluciones, véase
   $$d (n) = \sigma_0 (n) = \# \{ 1 \le d \le n \mid d \mid n \}.$$
 
   Encuentre los números tales que $d (n) = n/3$ y $n = d(n)^2$.
-\end{problema}
-
-\begin{problema}
-  Calcule la suma
-  $$\sum_{\substack{1 \le t \le n \\ \mcd (t,n) = 1}} t = \frac{\phi(n)}{2}\,n.$$
-\end{problema}
-
-\begin{problema}
-  Demuestre que las ecuaciones
-  $$3x^2 + 2 = y^2, \quad 7x^3 + 2 = y^3$$
-  no tienen soluciones $x,y \in \ZZ$, usando reducción módulo algunos $p$.
-\end{problema}
-
-\begin{problema}
-  Demuestre que para todo primo $p$, el numerador del número
-  $$1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{p-1}$$
-  es divisible por $p$.
 \end{problema}
 
 \begin{problema}[IWYMIC 2019 Individual contest]

@@ -14,6 +14,7 @@
 \setcounter{section}{2}
 
 \begin{problema}[Teorema chino del residuo]
+  \label{probl:CRT}
   Sean $m$ y $n$ dos enteros coprimos ($\mcd (m,n) = 1$).
 
   \begin{itemize}
@@ -58,6 +59,56 @@ Podemos reformular el resultado de arriba de la siguiente manera.
     4 \mapsto (0,1), ~
     5 \mapsto (1,2).
   \end{gather*}
+\end{ejemplo}
+
+\begin{problema}
+  Para $(m,n) = (3,5)$ reduzca los residuos mód $15$ módulo $3$ y $5$:
+  \begin{align*}
+    \ZZ/15\ZZ & \to \ZZ/3\ZZ \times \ZZ/5\ZZ, \\
+    0 & \mapsto (0,0), \\
+    1 & \mapsto (1,1), \\
+              & \ldots \\
+    10 & \mapsto (1,0), \\
+      & \ldots
+  \end{align*}
+  Verifique que en la parte derecha aparecen todos los pares de residuos
+  $([a]_3, [b]_5)$ para $a = 0,1,2$ y $b = 0,1,2,3,4$.
+\end{problema}
+
+\begin{ejemplo}
+  Vamos a resolver la congruencia $x^2 \equiv 1 \pmod{40}$.
+  Hay cuatro (!)  soluciones mód $8$:
+  $$1^2 \equiv 3^2 \equiv 5^2 \equiv 7^2 \equiv 1 \pmod{8}.$$
+  Por otra parte, mód $5$ hay solo dos soluciones esperadas $x \equiv \pm 1$.
+  El teorema chino del resto nos permite concluir que mód $40$ hay ocho
+  soluciones:
+    \begin{align*}
+      \ZZ/40\ZZ & \to \ZZ/8\ZZ \times \ZZ/5\ZZ, \\
+      1 & \mapsto (1, 1), \\
+      9 & \mapsto (1, 4), \\
+      11 & \mapsto (3, 1), \\
+      19 & \mapsto (3, 4), \\
+      21 & \mapsto (5, 1), \\
+      29 & \mapsto (5, 4), \\
+      31 & \mapsto (7, 1), \\
+      39 & \mapsto (7, 4).
+    \end{align*}
+
+  ¿Cómo reconstruir las soluciones mód $40$?
+  ¡Esto nos diría la solución del problema \ref{probl:CRT}!
+
+  Usando $\mcd(8,5) = 1$, escribamos la identidad de Bézout:
+  $$2\cdot 8 + (-3)\cdot 5 = 1.$$
+  De aquí se ve que
+  \begin{align*}
+    16 & \equiv 0 \pmod{8}, & \quad 16 & \equiv 1 \pmod{5}, \\
+    -15 & \equiv 1 \pmod{8}, & \quad -15 & \equiv 0 \pmod{5}.
+  \end{align*}
+
+  Por ejemplo, buscamos $x$ tal que
+  $$x \equiv 5 \pmod{8}, \quad x \equiv 4 \pmod{5}.$$
+  Entonces,
+  $$x = 5\cdot (-15) + 4\cdot 16 = -11 \equiv 29 \pmod{40}.$$
 \end{ejemplo}
 
 \begin{problema}
