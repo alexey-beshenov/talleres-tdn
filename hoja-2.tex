@@ -14,7 +14,7 @@
 \setcounter{section}{2}
 
 \begin{problema}[Teorema chino del residuo]
-  \label{probl:CRT}
+  \label{probl:CRT-1}
   Sean $m$ y $n$ dos enteros coprimos ($\mcd (m,n) = 1$).
 
   \begin{itemize}
@@ -30,6 +30,22 @@
   \end{itemize}
 \end{problema}
 
+\begin{problema}
+  \label{probl:CRT-2}
+  De nuevo, supongamos que $\mcd (m,n) = 1$.
+
+  \begin{itemize}
+  \item[a)] Demuestre que si $a \equiv 0 \pmod{m}$ y $a \equiv 0 \pmod{n}$,
+    entonces $a \equiv 0 \pmod{mn}$.
+
+  \item[b)] En el problema anterior, demuestre que el resto que corresponde a
+    los restos $a = b = 0$ es $c = 0$.
+
+  \item[c)] Deduzca que si $a \equiv b \pmod{m}$ y $a \equiv b \pmod{n}$,
+    entonces $a \equiv b \pmod{mn}$.
+  \end{itemize}
+\end{problema}
+
 Podemos reformular el resultado de arriba de la siguiente manera.
 
 \begin{framed}
@@ -42,10 +58,17 @@ Podemos reformular el resultado de arriba de la siguiente manera.
 \end{framed}
 
 \begin{proof}
-  Acabamos de probar que para todo par de residuos $([a]_m, [b]_n)$ habrá
-  $[c]_{mn}$ tal que $\Phi ([c]_{mm}) = ([a]_m,[b]_n)$.  Además, usando que
-  $$|\ZZ/mn\ZZ| = |\ZZ/m\ZZ \times \ZZ/n\ZZ| = |\ZZ/m\ZZ| \times |\ZZ/n\ZZ|,$$
-  podemos concluir que $\Phi$ es también inyectiva.
+  El problema~\ref{probl:CRT-1} establece la sobreyectividad,
+  y el problema~\ref{probl:CRT-2} establece la inyectividad\footnote{Una
+    aplicación $f\colon X\to Y$ es \textbf{inyectiva} si $f (x) \ne f (x')$ para
+    $x \ne x'$.
+
+    Una aplicación $f\colon X\to Y$ es \textbf{sobreyectiva} si para todo
+    $y \in Y$ existe $x \in X$ tal que $f (x) = y$.
+
+    En fin, $f\colon X\to Y$ es \textbf{biyectiva} si es inyectiva y
+    sobreyectiva; en otras palabras, si para $y \in Y$ hay \emph{único}
+    $x \in X$ tal que $f (x) = y$}.
 \end{proof}
 
 \begin{ejemplo}
