@@ -136,14 +136,36 @@ Podemos reformular el resultado de arriba de la siguiente manera.
 
 \begin{problema}
   \label{probl:crt-invertibles}
-  Demuestre que la biyección
-  $$\Phi\colon \ZZ/mn\ZZ \to \ZZ/m\ZZ \times \ZZ/n\ZZ$$
-  se restringe a una biyección entre los elementos invertibles
-  \begin{align*}
-    (\ZZ/mn\ZZ)^\times & \to (\ZZ/m\ZZ)^\times \times (\ZZ/n\ZZ)^\times, \\
-    [a]_{mn} & \mapsto ([a]_m, [a]_n).
-  \end{align*}
+  Como antes, $\mcd (m,n) = 1$.
+
+  \begin{itemize}
+  \item[a)] Demuestre que para $a \in \ZZ$ se tiene
+    \[
+      a \text{ es invertible mód }mn
+      \iff
+      \left\{\begin{array}{c}
+               a \text{ es invertible mód }m \\
+               y \\
+               a \text{ es invertible mód }n
+             \end{array}\right\}
+    \]
+
+  \item[b)] Deduzca que
+    $$|(\ZZ/mn\ZZ)^\times| = |(\ZZ/m\ZZ)^\times| \times |(\ZZ/n\ZZ)^\times|.$$
+  \end{itemize}
 \end{problema}
+
+\begin{ejemplo}
+  Los residuos invertibles mód $3$ y $5$ son
+  \begin{align*}
+    (\ZZ/3\ZZ)^\times & = \{ [1], [2] \}, \\
+    (\ZZ/5\ZZ)^\times & = \{ [1], [2], [3], [4] \}.
+  \end{align*}
+  El ejercicio anterior nos dice que hay $8$ residuos invertibles mód
+  $15$. Estos se recuperan del teorema chino del resto de
+  $(\ZZ/3\ZZ)^\times$ y $(\ZZ/5\ZZ)^\times$. La respuesta es
+  $$(\ZZ/15\ZZ)^\times = \{ [1], [2], [4], [7], [8], [11], [13], [14] \}.$$
+\end{ejemplo}
 
 \begin{problema}
   Formule y demuestre una versión del teorema chino del residuo para módulos
