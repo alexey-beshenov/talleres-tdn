@@ -9,9 +9,13 @@
 \usepackage{fourier}
 \usepackage{paratype}
 
+\usepackage{framed}
+
 \usepackage{hyperref}
 \usepackage{amsmath,amssymb}
 \usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{babel}
 
 \newcommand{\ZZ}{\mathbb{Z}}
 \DeclareMathOperator{\mcd}{mcd}
@@ -25,7 +29,7 @@
 \author{Alexey Beshenov (cadadr@gmail.com)}
 \date{21 de septiembre de 2021}
 
-\newenvironment{solucion}{\begin{proof}[Solución]\small}{\end{proof}}
+\newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
 
 \begin{document}
 
@@ -239,6 +243,7 @@ Para las soluciones, véase
 \end{problema}
 
 \begin{problema}
+  \label{probl:teselaciones}
   Se fija un punto en el plano y se consideran unas copias de $n$-ágono
   regular, tratando de colocarlas alrededor del punto.
   Demuestre que esto es posible solamente con $6$ triángulos, o $3$ cuadrados, o
@@ -288,6 +293,10 @@ Para las soluciones, véase
     $$f (3) = 6, \quad f (4) = 4, \quad f (5) = \frac{10}{3}, \quad f (6) = 3, \quad f (7) = \frac{14}{5} < 3,$$
     así que $2 < f (n) < 3$ para $n \ge 7$. Entonces, los únicos valores enteros
     son $f (3) = 6$, $f (4) = 4$, $f (6) = 3$.
+
+    Una manera más aritmética de resolver la ecuación 
+    $N = \frac{2n}{n-2}$ es notar que esta es equivalente a
+    la ecuación $(N-2)\,(n-2) = 4$.
   \end{solucion}\fi
  \end{problema}
 
@@ -441,12 +450,232 @@ Para las soluciones, véase
 \begin{problema}[IWYMIC 2019 Individual contest]
   Encuentre todas las soluciones enteras $(m,n)$ de la ecuación
   $$\frac{m^2 + mn + n^2}{m + 2n} = \frac{13}{3}.$$
+
+  \ifdefined\solutions\begin{solucion}
+    Para algún entero $a\ne 0$ se tiene
+    \begin{align*}
+      m^2 + mn + n^2 & = 13 a, \\
+      m + 2n & = 3 a.
+    \end{align*}
+
+    Podemos, por ejemplo, sustituir $m = 3a - 2n$ en la primera ecuación, y
+    analizar la ecuación cuadrática en $n$:
+    \begin{gather*}
+      (3a - 2n)^2 + (3a - 2n)\,n + n^2 = 13 a, \\
+      3n^2 - 9an + (9a^2 - 13a) = 0.
+    \end{gather*}
+    De aquí calculamos el discriminante
+    $$D = 156\,a - 27\,a^2 = 27a\,\left(\frac{52}{9} - a\right).$$
+    Esto nos deja con la condición
+    $$0 < a < \frac{52}{9} < 6 \Longrightarrow a = 1,2,3,4,5.$$
+    Antes de sustituir estos $a$ en el sistema de ecuaciones, hay varias formas
+    de reducir el trabajo. Por ejemplo, al elevar al cuadrado la segunda
+    ecuación, nos queda el sistema
+    \begin{align*}
+      m^2 + mn + n^2 & = 13 a, \\
+      m^2 + 4mn + 4n^2 & = 9 a^2.
+    \end{align*}
+    De aquí, restando,
+    $$3mn + 3n^2 = 9a^2 - 13a,$$
+    lo que implica que $3 \mid a$. Entonces, la única opción es $a = 3$, y luego
+    $m + 2n = 9$. En términos de $(m,n)$, habrá exactamente dos soluciones:
+    $(-5,7)$ y $(5,2)$.
+
+    \begin{center}
+      * * *
+    \end{center}
+
+    Para explicar qué está pasando y poner este problema en algún contexto,
+    la ecuación $x^2 + xy + y^2 = 13 a$ define una elipse para $a > 0$, mientras
+    que $x + 2y = 3 a$ define una recta.
+
+    \begin{itemize}
+    \item Para $a = 0$ la elipse se degenera en un punto, que es el origen, y la
+      recta pasa por el origen.
+
+    \item Para $0 < a < \frac{52}{9}$, la recta tendrá exactamente dos puntos de
+      intersección con la elipse.
+
+    \item Para $a = \frac{52}{9}$ habrá una tangencia entre la elipse y la recta.
+
+    \item Para $a > \frac{52}{9}$ no habrá intersecciones entre la recta y la
+      elipse.
+    \end{itemize}
+
+    \begin{center}
+      \begin{tikzpicture}[x=0.3cm, y=0.3cm]
+        \foreach \i in {-12,...,12} \draw[black!20] (-12,\i) -- (12,\i);
+        \foreach \i in {-12,...,12} \draw[black!20] (\i,-12) -- (\i,12);
+
+        \draw[->] (-14,0) -- (14,0) node[right] {$x$};
+        \draw[->] (0,-14) -- (0,14) node[above] {$y$};
+
+        \draw[rotate=-45] (0,0) ellipse (8.83176 and 5.09902);
+
+        \draw (-7,2) node[circle,fill,inner sep=1pt] {};
+        \draw (-7,5) node[circle,fill,inner sep=1pt] {};
+        \draw (-5,-2) node[circle,fill,inner sep=1pt] {};
+        \draw (-5,7) node[circle,fill,inner sep=1pt] {};
+        \draw (-2,-5) node[circle,fill,inner sep=1pt] {};
+        \draw (-2,7) node[circle,fill,inner sep=1pt] {};
+        \draw (2,-7) node[circle,fill,inner sep=1pt] {};
+        \draw (2,5) node[circle,fill,inner sep=1pt] {};
+        \draw (5,-7) node[circle,fill,inner sep=1pt] {};
+        \draw (5,2) node[circle,fill,inner sep=1pt] {};
+        \draw (7,-5) node[circle,fill,inner sep=1pt] {};
+        \draw (7,-2) node[circle,fill,inner sep=1pt] {};
+
+        \draw (-12,10.5) -- (12,-1.5);
+
+        \draw (-11,10) node[circle,fill,inner sep=1pt] {};
+        \draw (-9,9) node[circle,fill,inner sep=1pt] {};
+        \draw (-7,8) node[circle,fill,inner sep=1pt] {};
+        \draw (-5,7) node[circle,fill,inner sep=1pt] {};
+        \draw (-3,6) node[circle,fill,inner sep=1pt] {};
+        \draw (-1,5) node[circle,fill,inner sep=1pt] {};
+        \draw (1,4) node[circle,fill,inner sep=1pt] {};
+        \draw (3,3) node[circle,fill,inner sep=1pt] {};
+        \draw (5,2) node[circle,fill,inner sep=1pt] {};
+        \draw (7,1) node[circle,fill,inner sep=1pt] {};
+        \draw (9,0) node[circle,fill,inner sep=1pt] {};
+        \draw (11,-1) node[circle,fill,inner sep=1pt] {};
+      \end{tikzpicture}
+
+      La elipse $x^2 + xy + y^2 = 13a$ y la recta $x + 2y = 3a$ en el caso de
+      $a = 3$.
+    \end{center}
+
+    Nos interesan soluciones enteras. La recta $x + 2y = 3a$ siempre tendrá
+    puntos enteros (recuerde la identidad de Bézout). Sin embargo, la elipse
+    $x^2 + xy + y^2 = 13a$ puede no tener ningún punto entero.
+
+    Si $a \equiv 2 \pmod{3}$, entonces la ecuación $x^2 + xy + y^2 = 13a$ nos da una congruencia
+    $$x^2 + xy + y^2 \equiv -1 \pmod{3},$$
+    y esto es imposible. En particular, podemos concluir que para $a = 2,5$ las
+    elipses $x^2 + xy + y^2 = 13a$ no tienen puntos enteros.
+
+    En general, hay una manera de contar el número de puntos enteros sobre la
+    elipse $x^2 + xy + y^2 = n$ en términos de $n$. La respuesta es la
+    siguiente:
+
+    \begin{framed}
+      \noindent Consideremos la ecuación $x^2 + xy + y^2 = n$ para
+      $n = p_1^{e_1}\cdots p_s^{e_s}$.
+
+      \noindent Si para algún $i$ se tiene $p_i \equiv 2 \pmod{3}$ y $e_i$ es
+      impar, entonces la ecuación no tiene soluciones enteras.
+
+      \noindent En el caso contrario, el número de soluciones enteras es
+      $$6\,\prod_{p_i \equiv 1 ~ (3)} (e_i + 1).$$
+    \end{framed}
+
+    El número $6$ sale por razones de simetría en las soluciones (note también
+    que para $n = 1$ hay $6$ soluciones). En el dibujo de arriba se pueden
+    observar $12$ puntos enteros en el caso de $n = 3\cdot 13$.  La prueba del
+    resultado de arriba es un poco complicada, pero me gustaría mencionarlo,
+    como un bonito ejemplo de conteo aritmético.
+  \end{solucion}\fi
 \end{problema}
+
+\ifdefined\solutions\begin{proof}[Otra opción]
+  De una vez podemos analizar los puntos enteros en la elipse
+  $$3\,(x^2 + xy + y^2) = 13\,(x+2y).$$
+  Siendo una figura acotada, la elipse tiene un número finito de puntos enteros,
+  y en este caso se pueden ver las cotas $-5 \le x \le 5$, $0 \le y \le 9$, nada
+  más considerando la ecuación como cuadrática en la variable $x$ o $y$.
+
+  \pagebreak
+
+  Si podemos hacer un buen dibujo, se ve que los puntos enteros son $(0,0)$
+  (este no nos interesa), $(-5,7)$, $(5,2)$. Pero los dibujos pueden ser
+  engañosos. Por ejemplo, parece que $(4,5)$ es un punto en la
+  elipse. Sustutuyendo $(x,y) = (4,5)$, nos queda $3\,(x^2 + xy + y^2) = 183$ y
+  $13\,(x+2y) = 182$. Por esto $(4,5)$ es «casi» una solución.
+
+  \begin{center}
+      \begin{tikzpicture}[x=0.5cm, y=0.5cm]
+        \draw (4,5) node[circle,fill,yellow,inner sep=3pt] {};
+        \draw (1,8) node[circle,fill,yellow,inner sep=3pt] {};
+        \draw (-1,9) node[circle,fill,yellow,inner sep=3pt] {};
+        \draw (-4,9) node[circle,fill,yellow,inner sep=3pt] {};
+
+        \foreach \i in {-2,...,12} \draw[black!20] (-12,\i) -- (12,\i);
+        \foreach \i in {-12,...,12} \draw[black!20] (\i,-2) -- (\i,12);
+
+        \draw[->] (-14,0) -- (14,0) node[right] {$x$};
+        \draw[->] (0,-4) -- (0,14) node[above] {$y$};
+
+        \draw[shift={(0,4.333333)},rotate=-45] ellipse (6.12826 and 3.53815);
+
+        \draw (0,0) node[circle,fill,inner sep=1.5pt] {};
+        \draw (-5,7) node[circle,fill,inner sep=1.5pt] {};
+        \draw (5,2) node[circle,fill,inner sep=1.5pt] {};
+      \end{tikzpicture}
+
+      La elipse $3\,(x^2 + xy + y^2) = 13\,(x+2y)$ con puntos enteros y puntos
+      sospechosos
+    \end{center}
+\end{proof}\fi
 
 \begin{problema}[IWYMIC 2019 Team contest]
   Encontrar todos los posibles dígitos $(a,b)$ (es decir, $0 \le a, b \le 9$)
   tales que el número $2a1b9$ cumple la congruencia
   $$2a1b9^{2019} \equiv 1 \pmod{13}.$$
+\end{problema}
+
+\begin{problema}
+  Encontrar soluciones enteras $x, y > 0$ de la ecuación
+  $$\frac{1}{\sqrt{x}} + \frac{1}{\sqrt{y}} = \frac{1}{\sqrt{20}}.$$
+
+  \ifdefined\solutions\begin{solucion}    
+    Podemos expresar
+    $$x = \frac{20y}{20 + y - 2\,\sqrt{20\,y}},$$
+    de donde necesariamente $\sqrt{20\,y} \in \ZZ$; es decir, $20\,y$ es un
+    cuadrado. De manera completamente simétrica, $20\,x$ es un cuadrado. Pero
+    esto implica que $x = 5a^2$ e $y = 5b^2$ para algunos $a,b \in \ZZ$.
+    Sustituyendo en la ecuación $x = 5a^2$ e $y = 5b^2$, nos queda
+    $$\frac{1}{a} + \frac{1}{b} = \frac{1}{2}.$$
+    Aquí el resultado general es el siguiente.
+
+    \begin{framed}
+      Para ver cuáles son las soluciones enteras $u,v \in \ZZ$ de
+      $$\frac{1}{u} + \frac{1}{v} = \frac{1}{n},$$
+      se puede notar (¡ejercicio!) que esta ecuación es equivalente a
+      $$(u - n)\,(v - n) = n^2,$$
+      y por lo tanto las soluciones corresponden a los divisores de $n^2$
+    \end{framed}
+
+    En nuestro caso particular $n = 2$, así que tenemos
+    $$(a - 2)\,(b - 2) = 4,$$
+    de donde
+    $$(a,b) = (3,6), ~ (4,4), ~ (6,3).$$
+    Podemos concluir que
+    $$(x,y) = (5a^2,5b^2) = (45, 180), ~ (80,80) ~ (180,45).$$
+
+    \begin{center}
+      * * *
+    \end{center}
+
+    Un par de preguntas similares:
+
+    \begin{itemize}
+    \item[---] ¿cuáles son las soluciones enteras $x,y > 0$ de
+      $\frac{1}{\sqrt{x}} + \frac{1}{\sqrt{y}} = \frac{1}{\sqrt{n}}$ para
+      $n = 63$?
+
+    \item[---] ¿cuántas soluciones enteras tiene la ecuación
+      $\frac{1}{x} + \frac{1}{y} = \frac{1}{n}$ para $n = 2021$?
+
+    \item[---] Para $n = 1,2,3,\ldots$ fijo, sea $s(n)$ el número de soluciones
+      enteras $x,y > 0$ de $\frac{1}{x} + \frac{1}{y} = \frac{1}{n}$.
+
+      Demuestre que $s(n)$ es impar.
+
+    \item[---] Demuestre que si $\mcd (m,n) = 1$, entonces $s(mn) = s(m)\,s(n)$.
+
+      (En este caso se dice que $s (n)$ es una \textbf{función multiplicativa}.)
+    \end{itemize}
+  \end{solucion}\fi
 \end{problema}
 
 \end{document}
